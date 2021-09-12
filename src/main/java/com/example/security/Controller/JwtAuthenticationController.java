@@ -7,8 +7,10 @@ import com.example.security.Security.JwtResponse;
 import com.example.security.Security.JwtTokenUtil;
 import com.example.security.Security.JwtUserDetailsService;
 import lombok.Data;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,15 +19,12 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @CrossOrigin
+@Slf4j
 public class JwtAuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -33,9 +32,8 @@ public class JwtAuthenticationController {
     private final JwtUserDetailsService userDetailsService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     @Autowired
-    public JwtAuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public JwtAuthenticationController(AuthenticationManager authenticationManager,  JwtUserDetailsService userDetailsService, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenUtil jwtTokenUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
@@ -90,5 +88,16 @@ public class JwtAuthenticationController {
         protected String password;
     }
 
+    @RequestMapping(value = "/getUserID", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserID(@RequestHeader HttpHeaders httpHeaders) throws Exception {
+        String authorization = httpHeaders.getFirst("authorization");
+        authorization = authorization.substring(7);
+        String usernameFromToken = jwtTokenUtil.getUsernameFromToken(authorization);
+        return ResponseEntity.ok(usernameFromToken);
+    }
 
+    @RequestMapping(value = "/hallo", method = RequestMethod.GET)
+    public ResponseEntity<?> getHallo() throws Exception {
+        return ResponseEntity.ok("Hallo");
+    }
 }

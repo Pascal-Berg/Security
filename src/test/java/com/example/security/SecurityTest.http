@@ -1,4 +1,18 @@
-POST http://localhost:8080/registerUser
+GET http://localhost:8085/hallo
+Accept: application/json
+
+###
+
+GET http://localhost:8085/hallo
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQYXNjYWwiLCJleHAiOjE2MzE0MjUwMjksImlhdCI6MTYzMTQwNzAyOX0.lsfJrhG-4-E88rOHLrFQon6VciHiH1sXbKUyC6GSA226d1AdX90Fn0dHX2V5ocKv_t0jyMzzm_EFrAL28VXvRA
+
+###
+
+GET http://localhost:8085/getUserID
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQYXNjYWwiLCJleHAiOjE2MzE0MjUwMjksImlhdCI6MTYzMTQwNzAyOX0.lsfJrhG-4-E88rOHLrFQon6VciHiH1sXbKUyC6GSA226d1AdX90Fn0dHX2V5ocKv_t0jyMzzm_EFrAL28VXvRA
+
+###
+POST http://localhost:8085/registerUser
 Content-Type: application/json
 
 {
@@ -8,12 +22,11 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/authenticate
+POST http://localhost:8085/authenticate
 Content-Type: application/json
 
 {
   "username": "Pascal",
   "password": "Berg"
 }
-
 ###

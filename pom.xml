@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Security</artifactId>
+	<artifactId>security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Security</name>
+	<name>security</name>
 	<description>Security</description>
 	<properties>
 		<java.version>11</java.version>
@@ -69,6 +69,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<excludeDevtools>false</excludeDevtools>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -78,6 +79,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>docker-security</finalName>
 	</build>
 
 </project>

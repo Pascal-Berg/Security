@@ -14,21 +14,9 @@ import java.util.Optional;
 @SpringBootTest
 class SecurityApplicationTests {
 
-	@Autowired
-	UserRepository userRepository;
-
 	@Test
 	void testRepository() {
-		User user = userRepository.save(new User("Pascal", "Berg", "ROLE_USER"));
-		assert user != null;
-		Optional<User> userByUsername = userRepository.findByUsername("Pascal");
-		assert userByUsername.isPresent();
 
-	}
-
-	@AfterEach
-	void cleanRepository(){
-		userRepository.deleteAll();
 	}
 
 }
